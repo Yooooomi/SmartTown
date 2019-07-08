@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+static public class GameInfos
+{
+    static public GameTime gameTime;
+}
+
 public class GameTime
 {
     public int seconds;
@@ -18,12 +23,14 @@ public class GameTime
     public GameTime(int seconds)
     {
         this.seconds = seconds;
+        this.NormalizeTime();
     }
 
     public GameTime(int seconds, int minutes)
     {
         this.seconds = seconds;
         this.minutes = minutes;
+        this.NormalizeTime();
     }
 
     public GameTime(int seconds, int minutes, int hours)
@@ -31,6 +38,12 @@ public class GameTime
         this.seconds = seconds;
         this.minutes = minutes;
         this.hours = hours;
+        this.NormalizeTime();
+    }
+
+    public int SecondsSinceMidnight()
+    {
+        return seconds + minutes * 60 + hours * 3600;
     }
 
     private void NormalizeTime()
@@ -118,6 +131,49 @@ public class GameTime
         res.minutes = a.years + b.years;
         res.NormalizeTime();
         return res;
+    }
+
+    public override string ToString()
+    {
+        bool begun = false;
+        string basic = "";
+
+        if (years > 0)
+        {
+            basic += years + "y ";
+            begun = true;
+        }
+        if (months > 0 || begun)
+        {
+            basic += months + "m ";
+            begun = true;
+        }
+        if (days > 0 || begun)
+        {
+            basic += days + "d ";
+            begun = true;
+        }
+        if (hours > 0 || begun)
+        {
+            basic += hours + "h ";
+            begun = true;
+        }
+        if (minutes > 0 || begun)
+        {
+            basic += minutes + "m ";
+            begun = true;
+        }
+        if (seconds > 0 || begun)
+        {
+            basic += seconds + "s";
+            begun = true;
+        }
+        return basic;
+    }
+
+    public static GameTime operator*(GameTime a, float b)
+    {
+        return new GameTime((int) (a.toSeconds() * b));
     }
 }
 

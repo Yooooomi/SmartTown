@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+public class NeedStatistics
+{
+    public int timesDone;
+    public float totalTime;
+}
+
+public enum BusyType
+{
+    TRAVELLING,
+    ACTING,
+}
+
 public class UniversalQueue : TravelerFeedback
 {
-    private List<UniversalQueueMember> queue = new List<UniversalQueueMember>();
+    public List<UniversalQueueMember> queue { get; private set; } = new List<UniversalQueueMember>();
+    public BusyType actualState { get; private set; }
     private Traveler traveler;
     private GameObject currentNeedSatisfier = null;
     private Entity entity;
     private Objects.IObject objToInteract;
+
+    private float currentNeedStartTime;
+
+    private Dictionary<System.Type, NeedStatistics> statistics;
 
     private int currentStep;
 
@@ -48,6 +65,7 @@ public class UniversalQueue : TravelerFeedback
         }
         if (objToInteract.canBeUsed())
         {
+            actualState = BusyType.ACTING;
             ++currentStep;
             objToInteract.onUse();
             StartCoroutine(delayProcessCurrent());
@@ -56,11 +74,13 @@ public class UniversalQueue : TravelerFeedback
 
     private void processGoHere()
     {
+        actualState = BusyType.TRAVELLING;
         traveler.SetTarget(queue[0].need.transform);
     }
 
     private void processGoHome()
     {
+        actualState = BusyType.TRAVELLING;
         traveler.SetTarget(entity.house.transform);
     }
 

@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 4410949826866799480}
   - component: {fileID: 4410949826866799477}
   - component: {fileID: 4410949826866799482}
-  - component: {fileID: 4410949826866799483}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -111,20 +110,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4410949826866799483
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4410949826866799481}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4410949827002112684
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,9 +124,10 @@ GameObject:
   - component: {fileID: 4410949827002112683}
   - component: {fileID: 4410949827002112680}
   - component: {fileID: 7232560599756177032}
+  - component: {fileID: 781926125}
   m_Layer: 0
   m_Name: Human
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e723379689bf35a4abea8567e8c7ac9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 1.4
   rangeToInteract: 1
 --- !u!114 &7232560599756177032
 MonoBehaviour:
@@ -224,3 +210,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aebdfa6223b50b4196ae6a0aea363ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &781926125
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410949827002112684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
